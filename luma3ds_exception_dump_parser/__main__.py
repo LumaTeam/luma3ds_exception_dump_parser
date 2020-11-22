@@ -147,7 +147,15 @@ def main(args=None):
         print("Fault status: " + faultStatusSources[xfsr & 0xf])
 
     if additionalDataSize != 0:
-        print("Current process: {0} ({1:016x})".format(additionalData[:8].decode("ascii"), unpack_from("<Q", additionalData, 8)[0]))
+        if processor == 11:
+            print("Current process: {0} ({1:016x})".format(additionalData[:8].decode("ascii"), unpack_from("<Q", additionalData, 8)[0]))
+        else:
+            outName = os.path.splitext(args.filename)[0] + "_arm9mem.bin"
+            with open(outName, "wb+") as f:
+                f.write(additionalData)
+
+            # We don't care if we fail, I guess
+            print("Arm9 RAM dumped to {0}, size {1:x}".format(outName, additionalDataSize))
 
     print("\nRegister dump:\n")
     for i in range(0, nbRegisters - (nbRegisters % 2), 2):
