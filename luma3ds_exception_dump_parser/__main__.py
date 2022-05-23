@@ -2,7 +2,7 @@
 # Requires Python >= 3.2 or >= 2.7
 
 #   This file is part of Luma3DS
-#   Copyright (C) 2016-2020 Aurora Wright, TuxSH
+#   Copyright (C) 2016-2022 Aurora Wright, TuxSH
 #
 #   This program is free software: you can redistribute it and/or modify
 #   it under the terms of the GNU General Public License as published by
@@ -22,9 +22,9 @@
 #   Notices displayed by works containing it.
 
 __author__    = "TuxSH"
-__copyright__ = "Copyright (c) 2016-2020 TuxSH"
+__copyright__ = "Copyright (c) 2016-2022 TuxSH"
 __license__   = "GPLv3"
-__version__   = "v1.2"
+__version__   = "v1.3"
 
 """
 Parses Luma3DS exception dumps
@@ -110,6 +110,8 @@ def main(args=None):
     version, processor, exceptionType, _, nbRegisters, codeDumpSize, stackDumpSize, additionalDataSize = unpack_from("<8I", data, 8)
     nbRegisters //= 4
 
+    processor, coreId = processor & 0xffff, processor >> 16
+
     if version < (1 << 16) | 2:
         raise SystemExit("Incompatible format version, please use the appropriate parser.")
 
@@ -122,7 +124,7 @@ def main(args=None):
     additionalData = data[addtionalDataOffset : addtionalDataOffset + additionalDataSize]
 
     if processor == 9: print("Processor: Arm9")
-    else: print("Processor: Arm11 (core {0})".format(processor >> 16))
+    else: print("Processor: Arm11 (core {0})".format(coreId))
 
     typeDetailsStr = ""
     if exceptionType == 2:
