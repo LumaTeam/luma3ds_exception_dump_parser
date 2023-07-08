@@ -1,30 +1,10 @@
 #!/usr/bin/env python
 # Requires Python >= 3.2 or >= 2.7
 
-#   This file is part of Luma3DS
-#   Copyright (C) 2016-2022 Aurora Wright, TuxSH
-#
-#   This program is free software: you can redistribute it and/or modify
-#   it under the terms of the GNU General Public License as published by
-#   the Free Software Foundation, either version 3 of the License, or
-#   (at your option) any later version.
-#
-#   This program is distributed in the hope that it will be useful,
-#   but WITHOUT ANY WARRANTY; without even the implied warranty of
-#   MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
-#   GNU General Public License for more details.
-#
-#   You should have received a copy of the GNU General Public License
-#   along with this program.  If not, see <http://www.gnu.org/licenses/>.
-#
-#   Additional Terms 7.b of GPLv3 applies to this file: Requiring preservation of specified
-#   reasonable legal notices or author attributions in that material or in the Appropriate Legal
-#   Notices displayed by works containing it.
-
 __author__    = "TuxSH"
-__copyright__ = "Copyright (c) 2016-2022 TuxSH"
-__license__   = "GPLv3"
-__version__   = "v1.3"
+__copyright__ = "Copyright (c) 2016-2023 TuxSH"
+__license__   = "MIT"
+__version__   = "v1.3.1"
 
 """
 Parses Luma3DS exception dumps
@@ -36,7 +16,7 @@ from struct import unpack_from
 import os
 import subprocess
 
-# Source of hexdump: https://gist.github.com/ImmortalPC/c340564823f283fe530b
+# Source of hexdump: https://gist.github.com/1mm0rt41PC/c340564823f283fe530b
 # Credits for hexdump go to the original authors
 # Slightly edited by TuxSH
 
