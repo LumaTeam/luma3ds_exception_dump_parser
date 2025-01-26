@@ -115,7 +115,7 @@ def main(args=None):
             elif instr == 0xef00003c:
                 typeDetailsStr = " " + (svcBreakReasons[registers[0]] if registers[0] < 3 else "(svcBreak)")
         elif (registers[16] & 0x20) == 1 and codeDumpSize >= 2:
-            instr = unpack_from("<I", codeDump[-4:])[0]
+            instr = unpack_from("<H", codeDump[-2:])[0]
             if instr == 0xdf3c:
                 typeDetailsStr = " " + (svcBreakReasons[registers[0]] if registers[0] < 3 else "(svcBreak)")
 
@@ -126,7 +126,7 @@ def main(args=None):
 
     if processor == 11 and exceptionType >= 2:
         xfsr = registers[18] if exceptionType == 2 else registers[17]
-        print("Fault status: " + faultStatusSources[xfsr & 0xf])
+        print("Fault status: " + faultStatusSources.get(xfsr & 0xf, "Unknown"))
 
     if additionalDataSize != 0:
         if processor == 11:
